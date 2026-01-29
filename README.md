@@ -16,7 +16,7 @@ Inside bash: (ideally use Git Bash or Anaconda Prompt)
 
 Working with Git:
   1. git branch -> double check you're in your own branch
-  2. git pull
+  2. git pull (iff there is a push to main then do git pull origin main)
   3. edit code and add files 
   4. git add . -> adds all changes to your push
   5. git commit -m "update info"
