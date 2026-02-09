@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "radiolab-utils"
+version = "0.1.0"
+description = "Radio Lab 1 utilities: sampling, power spectrum, and data loading"
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = ["numpy"]
+
+[project.optional-dependencies]
+dev = ["matplotlib", "scipy"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["radiolab_utils*"]
