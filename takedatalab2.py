@@ -15,13 +15,16 @@ local_now = ugradio.timing.local_time()
 ut_now = ugradio.timing.utc()
 # ut_now_unix = ugradio.timing.unix_time()
 
-time_array = np.array([[[julian_now, local_now, ut_now]]])
-
-data = np.concatenate((time_array,data))
-
 print(sdr)
 print(data)
-np.savez(labelname, data)
+np.savez(
+     labelname, 
+     samples=data,
+     jd=julian_now,
+     utc=ut_now,
+     local = local_now,
+     center_freq=1419e6,
+     sample_rate=2e6)
 print("saved ", labelname)
 
 np.load(labelname)
