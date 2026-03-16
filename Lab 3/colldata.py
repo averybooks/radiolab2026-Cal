@@ -1,5 +1,5 @@
 """
-sun_track.py
+tracksun.py
 Controls both interferometer antennas to track the sun for a fixed duration.
 Stows antennas and exits if the sun moves out of pointing bounds.
 """
@@ -65,7 +65,7 @@ def collect_data(snap, avg_window=AVG_WINDOW):
             tracking_event.wait(timeout=1.0)
             continue
 
-        # ── One averaging window ───────────────────────────────────────────────
+        # One averaging window 
         spectra_buffer  = []
         window_start    = time.time()
         prev_cnt        = None
@@ -145,7 +145,7 @@ def run(snap, track_fn, track_kwargs=None):
 
 # Entry
 if __name__ == '__main__':
-    from sun_track import track_sun   # your tracking script
+    from tracksun import track_sun   # your tracking script
 
     snap = UGRadioSnap()
     snap.initialize(mode='corr')
