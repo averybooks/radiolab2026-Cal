@@ -17,7 +17,7 @@ import threading
 from snap_spec import snap   
 
 # Config
-AVG_WINDOW      = 30.0   # seconds per averaged output spectrum
+AVG_WINDOW      = 30.0   # seconds per ONE averaged output spectrum
 DELAY_TIME      = 0.1    # seconds between acc_cnt polls
 
 # Shared state between threads
@@ -51,8 +51,7 @@ def collect_data(snap, avg_window=AVG_WINDOW):
     Accumulates spectra into fixed-duration windows, then computes and stores
     the quadrupled averaged power spectrum for each window.
 
-    Parameters
-    ----------
+    Params
     snap       : UGRadioSnap instance, already initialized in corr mode
     avg_window : float, seconds per averaging window
     """
@@ -97,7 +96,7 @@ def collect_data(snap, avg_window=AVG_WINDOW):
             prev_cnt = data['acc_cnt']
             spectra_buffer.append(data['corr01'])   # complex array, shape (N_chan,)
 
-        # ── Process and store if we have data ─────────────────────────────────
+        # stores
         if len(spectra_buffer) > 0:
             result = {
                 'timestamp'  : window_start,
@@ -116,8 +115,7 @@ def run(snap, track_fn, track_kwargs=None):
     """
     Launch tracking and data collection in parallel threads.
 
-    Parameters
-    ----------
+    Params
     snap         : UGRadioSnap instance, already initialized in corr mode
     track_fn     : the track_sun function from sun_track.py, 
                    modified to set/clear tracking_event and stop_event (see note)
@@ -135,7 +133,7 @@ def run(snap, track_fn, track_kwargs=None):
     data_thread.start()
 
     try:
-        # Tracking runs on the main thread — it controls the events
+        # Tracking runs on the main thread
         track_fn(**track_kwargs)
     finally:
         stop_event.set()
