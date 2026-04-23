@@ -1,0 +1,14 @@
+
+**removed the grid generation to use Evan's CSV files: NOTE THE CSV FILES ARE TIME SENSITIVE AND NEED TO BE RECOMPUTED FOR OBSERVATION DAY
+
+**Threading model** — mirrors `colldata1.py` pattern but simplified: the actual slew and take data run singularly (no threading) but there should be a threaded event with activating a function check - we may want to try to rewrite exactly how it checks data health
+
+**Per-window file saving** — each averaged window is written to its own `.npz` immediately after closing, named `nps_sci_l{l}_b{b}_jd{jd}.npz`. This means a crash or lost SSH session loses at most one window. Every file carries full metadata (ℓ, b, alt, az, RA/Dec, JD, noise diode flag, SDR settings) so it's self-describing.z
+
+-> we are saving frequency switched data for both polarizations such that dictionary will contain 4 total averaged power spectra
+
+**Noise-diode calibration** — only at start
+
+**implemented alt-az from astropy instead of ugradio
+
+**sdr reinitialization should be correct however, if issue persists then verify the nature of the wrapper and the class call
